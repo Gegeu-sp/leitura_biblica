@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roteiro de Vendas | Cia Athletica Mooca</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5.0.0/index.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/space-grotesk@5.0.0/index.css">
+<style>
+  * { font-family: 'Inter', sans-serif; }
+  h1, h2, h3, h4, .brand { font-family: 'Space Grotesk', sans-serif; }
+  
+  .gradient-bg {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #ff6b00 100%);
+  }
+  
+  .card-hover {
+    transition: all 0.3s ease;
+  }
+  .card-hover:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 40px rgba(255, 107, 0, 0.2);
+  }
+  
+  .accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+  }
+  .accordion-content.open {
+    max-height: 2000px;
+  }
+  
+  .tab-active {
+    background: #ff6b00 !important;
+    color: white !important;
+    border-color: #ff6b00 !important;
+  }
+  
+  .copy-btn {
+    transition: all 0.2s;
+  }
+  .copy-btn:hover {
+    background: #ff6b00 !important;
+    color: white !important;
+  }
+  
+  .fade-in {
+    animation: fadeIn 0.5s ease-in;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .pulse-dot {
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+  }
+  
+  .scenario-card {
+    border-left: 4px solid #ff6b00;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  .scenario-card:hover {
+    background: rgba(255, 107, 0, 0.05);
+  }
+  
+  .scenario-expanded {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease, margin-top 0.3s ease;
+  }
+  .scenario-expanded.open {
+    max-height: 1500px;
+    margin-top: 1rem;
+  }
+  
+  .chat-bubble {
+    animation: slideIn 0.3s ease;
+  }
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateX(-10px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+  
+  .progress-step {
+    transition: all 0.3s ease;
+  }
+  .progress-step.active {
+    background: #ff6b00;
+    color: white;
+    transform: scale(1.1);
+  }
+  .progress-step.completed {
+    background: #22c55e;
+    color: white;
+  }
+  
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-track { background: #1a1a1a; }
+  ::-webkit-scrollbar-thumb { background: #ff6b00; border-radius: 4px; }
+  
+  .search-highlight {
+    background: rgba(255, 107, 0, 0.3);
+    padding: 2px 4px;
+    border-radius: 3px;
+  }
+  
+  .typing-indicator span {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background: #ff6b00;
+    border-radius: 50%;
+    margin: 0 2px;
+    animation: typing 1.4s infinite;
+  }
+  .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
+  .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes typing {
+    0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
+    30% { transform: translateY(-8px); opacity: 1; }
+  }
+  
+  .checklist-item {
+    transition: all 0.2s ease;
+  }
+  .checklist-item.checked {
+    background: rgba(34, 197, 94, 0.1);
+    border-color: #22c55e !important;
+  }
+  .checklist-item.checked .check-box {
+    background: #22c55e;
+    border-color: #22c55e;
+  }
+  .checklist-item.checked .check-text {
+    text-decoration: line-through;
+    color: #9ca3af;
+  }
+</style>
+</head>
+<body class="bg-gray-950 text-gray-100 min-h-screen">
+
+<!-- HEADER -->
+<header class="gradient-bg sticky top-0 z-50 border-b border-orange-500/30">
+  <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between flex-wrap gap-3">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 bg-orange-500 rounded-lg flex items-center justify-center font-bold text-xl brand">C</div>
+      <div>
+        <h1 class="text-xl font-bold brand">CIA ATHLETICA MOOCA</h1>
+        <p class="text-xs text-orange-300">Roteiro de Vendas Consultivas • 2026</p>
+      </div>
+    </div>
+    <div class="flex items-center gap-4">
+      <div class="hidden md:flex items-center gap-2 bg-gray-900/50 rounded-full px-3 py-1.5 border border-gray-700">
+        <input type="text" id="searchInput" placeholder="🔍 Buscar..." class="bg-transparent text-sm outline-none w-40 text-gray-200 placeholder-gray-500">
+      </div>
+      <button onclick="toggleChecklist()" class="bg-gray-900/50 hover:bg-orange-500 transition px-3 py-1.5 rounded-full text-sm border border-gray-700 flex items-center gap-2">
+        <span>✓</span>
+        <span class="hidden sm:inline">Checklist</span>
+        <span id="checklistCount" class="bg-orange-500 text-white text-xs px-1.5 py-0.5 rounded-full">0/7</span>
+      </button>
+      <div class="flex items-center gap-2 text-sm">
+        <span class="w-2 h-2 bg-green-400 rounded-full pulse-dot"></span>
+        <span class="text-gray-300 hidden sm:inline">Equipe Comercial</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="max-w-7xl mx-auto px-4 py-10 text-center">
+  <h2 class="text-3xl md:text-5xl font-bold mb-4 brand">
+    Do <span class="text-orange-500">Produto</span> à <span class="text-orange-500">Metodologia</span>
+  </h2>
+  <p class="text-gray-400 max-w-2xl mx-auto text-base md:text-lg">
+    Guia completo para conversão de novos alunos com foco em acolhimento, resultados mensuráveis e prova concreta de evolução.
+  </p>
+  <div class="flex flex-wrap justify-center gap-2 mt-6">
+    <button onclick="showSection('filosofia')" class="bg-gray-900 border border-gray-800 hover:border-orange-500 rounded-full px-4 py-2 text-sm transition">🎯 Venda Consultiva</button>
+    <button onclick="showSection('argumentacao')" class="bg-gray-900 border border-gray-800 hover:border-orange-500 rounded-full px-4 py-2 text-sm transition">💓 Monitoramento Cardíaco</button>
+    <button onclick="showSection('argumentacao')" class="bg-gray-900 border border-gray-800 hover:border-orange-500 rounded-full px-4 py-2 text-sm transition">📊 Resultados Mensuráveis</button>
+    <button onclick="showSection('saudacao')" class="bg-gray-900 border border-gray-800 hover:border-orange-500 rounded-full px-4 py-2 text-sm transition">🤝 Acolhimento</button>
+  </div>
+</section>
+
+<!-- PROGRESS BAR -->
+<div class="max-w-7xl mx-auto px-4 mb-6">
+  <div class="bg-gray-900 rounded-2xl p-4 border border-gray-800">
+    <div class="flex items-center justify-between mb-3">
+      <h4 class="text-sm font-semibold text-gray-300">Progresso do Atendimento</h4>
+      <span id="progressText" class="text-xs text-orange-400">Etapa 0 de 7</span>
+    </div>
+    <div class="flex items-center justify-between gap-1">
+      <button onclick="showSection('filosofia')" class="progress-step flex-1 bg-gray-800 rounded-lg py-2 text-xs font-medium" data-step="1">🧠 Filosofia</button>
+      <button onclick="showSection('saudacao')" class="progress-step flex-1 bg-gray-800 rounded-lg py-2 text-xs font-medium" data-step="2">👋 Saudação</button>
+      <button onclick="showSection('storytelling')" class="progress-step flex-1 bg-gray-800 rounded-lg py-2 text-xs font-medium" data-step="3">📖 Story</button>
+      <button onclick="showSection('argumentacao')" class="progress-step flex-1 bg-gray-800 rounded-lg py-2 text-xs font-medium" data-step="4">🎯 Argum.</button>
+      <button onclick="showSection('objecoes')" class="progress-step flex-1 bg-gray-800 rounded-lg py-2 text-xs font-medium" data-step="5">🛡️ Objeç.</button>
+      <button onclick="showSection('cenarios')" class="progress-step flex-1 bg-gray-800 rounded-lg py-2 text-xs font-medium" data-step="6">🎭 Cenár.</button>
+      <button onclick="showSection('fechamento')" class="progress-step flex-1 bg-gray-800 rounded-lg py-2 text-xs font-medium" data-step="7">✅ Fech.</button>
+    </div>
+  </div>
+</div>
+
+<!-- TABS NAVIGATION -->
+<nav class="max-w-7xl mx-auto px-4 mb-6">
+  <div class="flex flex-wrap gap-2 justify-center">
+    <button onclick="showSection('filosofia')" class="tab-btn tab-active px-4 py-2 rounded-full text-sm font-medium bg-gray-800 border border-gray-700 transition">🧠 Filosofia</button>
+    <button onclick="showSection('saudacao')" class="tab-btn px-4 py-2 rounded-full text-sm font-medium bg-gray-800 border border-gray-700 transition">👋 Saudação</button>
+    <button onclick="showSection('storytelling')" class="tab-btn px-4 py-2 rounded-full text-sm font-medium bg-gray-800 border border-gray-700 transition">📖 Storytelling</button>
+    <button onclick="showSection('argumentacao')" class="tab-btn px-4 py-2 rounded-full text-sm font-medium bg-gray-800 border border-gray-700 transition">🎯 Argumentação</button>
+    <button onclick="showSection('objecoes')" class="tab-btn px-4 py-2 rounded-full text-sm font-medium bg-gray-800 border border-gray-700 transition">🛡️ Objeções</button>
+    <button onclick="showSection('cenarios')" class="tab-btn px-4 py-2 rounded-full text-sm font-medium bg-gray-800 border border-gray-700 transition">🎭 Cenários</button>
+    <button onclick="showSection('fechamento')" class="tab-btn px-4 py-2 rounded-full text-sm font-medium bg-gray-800 border border-gray-700 transition">✅ Fechamento</button>
+    <button onclick="showSection('simulador')" class="tab-btn px-4 py-2 rounded-full text-sm font-medium bg-gray-800 border border-gray-700 transition">💬 Simulador</button>
+  </div>
+</nav>
+
+<!-- CHECKLIST PANEL -->
+<div id="checklistPanel" class="fixed top-20 right-4 w-80 bg-gray-900 rounded-2xl p-5 border border-gray-800 shadow-2xl z-40 hidden">
+  <div class="flex items-center justify-between mb-4">
+    <h3 class="font-bold text-orange-400">✓ Checklist do Atendimento</h3>
+    <button onclick="toggleChecklist()" class="text-gray-400 hover:text-white">✕</button>
+  </div>
+  <div class="space-y-2" id="checklistItems"></div>
+  <button onclick="resetChecklist()" class="mt-4 w-full bg-gray-800 hover:bg-gray-700 text-sm py-2 rounded-lg transition">🔄 Reiniciar Checklist</button>
+</div>
+
+<!-- MAIN CONTENT -->
+<main class="max-w-7xl mx-auto px-4 pb-20">
+
+  <!-- FILOSOFIA -->
+  <section id="filosofia" class="section fade-in">
+    <div class="bg-gray-900 rounded-2xl p-6 md:p-8 border border-gray-800 mb-6">
+      <h3 class="text-2xl font-bold mb-4 brand text-orange-500">Mentalidade do Consultor 2026</h3>
+      <p class="text-gray-300 leading-relaxed mb-6">
+        O novo aluno <strong class="text-white">não compra mensalidade de academia</strong>; ele compra <span class="text-orange-400 font-semibold">segurança, acolhimento e a certeza de que verá resultados</span>. Seu papel é atuar como <strong class="text-white">consultor de transformação</strong>, diagnosticando necessidades e apresentando a metodologia completa da Cia Athletica como solução ideal.
+      </p>
+      <div class="grid md:grid-cols-3 gap-4">
+        <div class="bg-gray-800/50 rounded-xl p-5 border border-gray-700 card-hover">
+          <div class="text-3xl mb-2">🤝</div>
+          <h4 class="font-bold mb-2">Acolhimento</h4>
+          <p class="text-sm text-gray-400">O aluno nunca treina sozinho. Equipe treinada para ensinar cada movimento com segurança.</p>
+        </div>
+        <div class="bg-gray-800/50 rounded-xl p-5 border border-gray-700 card-hover">
+          <div class="text-3xl mb-2">💓</div>
+          <h4 class="font-bold mb-2">Resultados Mensuráveis</h4>
+          <p class="text-sm text-gray-400">Tiramos o "achismo" do treino. Tecnologia de monitoramento garante intensidade ideal.</p>
+        </div>
+        <div class="bg-gray-800/50 rounded-xl p-5 border border-gray-700 card-hover">
+          <div class="text-3xl mb-2">📊</div>
+          <h4 class="font-bold mb-2">Prova de Evolução</h4>
+          <p class="text-sm text-gray-400">Relatório personalizado por e-mail com calorias, zonas cardíacas e frequência.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-gradient-to-r from-orange-500/10 to-transparent rounded-2xl p-6 border border-orange-500/30">
+      <h4 class="font-bold text-orange-400 mb-3">⚡ Regra de Ouro: Velocidade é Conversão</h4>
+      <p class="text-gray-300 text-sm">Responda ao lead em <strong class="text-white">até 5 minutos</strong>. Leads respondidos rapidamente têm até <strong class="text-orange-400">400% mais chance</strong> de conversão. Participação em aula experimental aumenta conversão de <strong class="text-orange-400">24% para 48%</strong>.</p>
+    </div>
+  </section>
+
+  <!-- SAUDAÇÃO -->
+  <section id="saudacao" class="section hidden fade-in">
+    <div class="bg-gray-900 rounded-2xl p-6 md:p-8 border border-gray-800 mb-6">
+      <h3 class="text-2xl font-bold mb-4 brand text-orange-500">Etapa 1: Saudação Inicial</h3>
+      <p class="text-gray-400 mb-4">Primeiro contato via WhatsApp/Instagram. Personalizado e acolhedor.</p>
+      
+      <div class="bg-black rounded-xl p-5 border border-gray-800 mb-4 relative">
+        <button onclick="copyText('saudacao-text', this)" class="copy-btn absolute top-3 right-3 bg-gray-800 text-xs px-3 py-1 rounded-full">📋 Copiar</button>
+        <p id="saudacao-text" class="text-gray-200 leading-relaxed whitespace-pre-line pr-20">Olá, [Nome do Lead]! Tudo bem? 😊
+
+Aqui é o [Seu Nome], consultor de novas jornadas da Cia Athletica Mooca Plaza Shopping. Vi que você demonstrou interesse em conhecer nossa academia e dar o primeiro passo na sua vida fitness. Que ótimo ter você por aqui!
+
+Para eu te apresentar o caminho ideal e tirar todas as suas dúvidas, me conta rapidinho: qual é o seu principal objetivo ao começar a treinar agora?
+
+(Ex: emagrecimento, mais disposição, aliviar o estresse do trabalho ou cuidar da saúde?)</p>
+      </div>
+    </div>
+
+    <div class="bg-gray-900 rounded-2xl p-6 md:p-8 border border-gray-800">
+      <h3 class="text-2xl font-bold mb-4 brand text-orange-500">Tratativa: Escuta Ativa</h3>
+      <p class="text-gray-400 mb-4">Aguarde a resposta e valide o sentimento do aluno antes de apresentar soluções.</p>
+      
+      <div class="bg-black rounded-xl p-5 border border-gray-800 relative">
+        <button onclick="copyText('tratativa-text', this)" class="copy-btn absolute top-3 right-3 bg-gray-800 text-xs px-3 py-1 rounded-full">📋 Copiar</button>
+        <p id="tratativa-text" class="text-gray-200 leading-relaxed whitespace-pre-line pr-20">Entendo perfeitamente, [Nome]. É muito comum sentir [insegurança/falta de tempo/necessidade de mudança] quando se está começando. A boa notícia é que a Cia Athletica foi estruturada justamente para acolher quem está no dia 1, com todo o suporte para você não se sentir perdido.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- STORYTELLING -->
+  <section id="storytelling" class="section hidden fade-in">
+    <div class="bg-gray-900 rounded-2xl p-6 md:p-8 border border-gray-800 mb-6">
+      <h3 class="text-2xl font-bold mb-4 brand text-orange-500">Etapa 2: Storytelling</h3>
+      <p class="text-gray-400 mb-4">Use uma história real para gerar identificação. Adapte conforme o objetivo do lead.</p>
+      
+      <div class="bg-black rounded-xl p-5 border border-gray-800 mb-4 relative">
+        <button onclick="copyText('story-text', this)" class="copy-btn absolute top-3 right-3 bg-gray-800 text-xs px-3 py-1 rounded-full">📋 Copiar</button>
+        <p id="story-text" class="text-gray-200 leading-relaxed whitespace-pre-line pr-20">Sabe, [Nome], você me lembrou muito a história da Mariana. Ela chegou aqui na Mooca há alguns meses exatamente com esse mesmo objetivo [citar objetivo do lead], mas com medo de não acompanhar o ritmo ou de se machucar.
+
+Nós a apresentamos à nossa metodologia de acompanhamento. Ela começou devagar, e o grande diferencial para ela foi perceber que não estava treinando "no escuro". Graças ao nosso sistema de monitoramento, ela via a evolução semana após semana.
+
+Em 3 meses, ela não só atingiu a meta inicial, como hoje tem tanta energia que até indica amigas para a academia pelo nosso programa Cia Conecta. O segredo não foi força de vontade sobrenatural, foi ter o método e o ambiente certos.</p>
+      </div>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-4">
+      <div class="bg-gray-900 rounded-xl p-5 border border-gray-800">
+        <div class="text-orange-500 font-bold mb-3">🎭 Tipos de Transformação</div>
+        <ul class="text-sm text-gray-300 space-y-2">
+          <li class="flex items-start gap-2"><span class="text-orange-500">●</span><span><strong>Física:</strong> Perda de peso, ganho de massa</span></li>
+          <li class="flex items-start gap-2"><span class="text-orange-500">●</span><span><strong>Mental:</strong> Redução de ansiedade, melhora do sono</span></li>
+          <li class="flex items-start gap-2"><span class="text-orange-500">●</span><span><strong>Social:</strong> Novas amizades, comunidade</span></li>
+          <li class="flex items-start gap-2"><span class="text-orange-500">●</span><span><strong>Profissional:</strong> Performance, disposição</span></li>
+        </ul>
+      </div>
+      <div class="bg-gray-900 rounded-xl p-5 border border-gray-800">
+        <div class="text-orange-500 font-bold mb-3">📝 Estrutura da Narrativa</div>
+        <ol class="text-sm text-gray-300 space-y-2">
+          <li class="flex items-start gap-2"><span class="text-orange-500 font-bold">1.</span><span><strong>Situação Inicial:</strong> Dores do protagonista</span></li>
+          <li class="flex items-start gap-2"><span class="text-orange-500 font-bold">2.</span><span><strong>Transformação:</strong> Momento de virada</span></li>
+          <li class="flex items-start gap-2"><span class="text-orange-500 font-bold">3.</span><span><strong>Resultado:</strong> Metas alcançadas</span></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- ARGUMENTAÇÃO -->
+  <section id="argumentacao" class="section hidden fade-in">
+    <div class="bg-gray-900 rounded-2xl p-6 md:p-8 border border-gray-800 mb-6">
+      <h3 class="text-2xl font-bold mb-4 brand text-orange-500">Etapa 3: Argumentação (3 Pilares)</h3>
+      <p class="text-gray-400 mb-6">Apresente a academia como um ecossistema completo. A Orange Zone é a prova tecnológica do método.</p>
+      
+      <div class="bg-black rounded-xl p-5 border border-gray-800 mb-4 relative">
+        <button onclick="copyText('arg-text', this)" class="copy-btn absolute top-3 right-3 bg-gray-800 text-xs px-3 py-1 rounded-full">📋 Copiar</button>
+        <p id="arg-text" class="text-gray-200 leading-relaxed whitespace-pre-line pr-20">Na Cia Athletica Mooca, nós não vendemos apenas acesso a equipamentos. Nós oferecemos um método inteligente para quem está começando, baseado em 3 pilares:
+
+1. ACOLHIMENTO E SEGURANÇA
+Nossa equipe é treinada para ensinar cada movimento. Você nunca estará sozinho ou fazendo algo errado.
+
+2. RESULTADOS MENSURÁVEIS
+Diferente de academias comuns, nós tiramos o "achismo" do seu treino. Temos modalidades exclusivas, como a aula Orange Zone, que utilizam monitoramento cardíaco em tempo real. Isso garante que você treine na intensidade ideal para o seu corpo, queimando gordura com máxima eficiência e total segurança.
+
+3. PROVA CONCRETA DE EVOLUÇÃO
+Sabe o que motiva qualquer iniciante a continuar? Ver o resultado. Por isso, ao final de treinos monitorados, você recebe um relatório personalizado por e-mail com suas calorias queimadas, tempo nas zonas de frequência cardíaca e evolução. É a prova visual de que seu esforço está valendo a pena.
+
+Além disso, a energia de treinar em grupo cria um ambiente motivador que faz você querer voltar na semana seguinte.</p>
+      </div>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-4">
+      <div class="bg-gradient-to-br from-blue-500/10 to-transparent rounded-xl p-5 border border-blue-500/30 card-hover">
+        <div class="text-2xl mb-2">🛡️</div>
+        <h4 class="font-bold text-blue-400 mb-2">Pilar 1: Segurança</h4>
+        <p class="text-sm text-gray-400">Instrutores presentes. Movimentos ensinados. Zero julgamento.</p>
+      </div>
+      <div class="bg-gradient-to-br from-orange-500/10 to-transparent rounded-xl p-5 border border-orange-500/30 card-hover">
+        <div class="text-2xl mb-2">💓</div>
+        <h4 class="font-bold text-orange-400 mb-2">Pilar 2: Tecnologia</h4>
+        <p class="text-sm text-gray-400">Monitoramento cardíaco. Intensidade ideal. Eficiência comprovada.</p>
+      </div>
+      <div class="bg-gradient-to-br from-green-500/10 to-transparent rounded-xl p-5 border border-green-500/30 card-hover">
+        <div class="text-2xl mb-2">📊</div>
+        <h4 class="font-bold text-green-400 mb-2">Pilar 3: Dados</h4>
+        <p class="text-sm text-gray-400">Relatório por e-mail. Calorias, zonas cardíacas, evolução.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- OBJEÇÕES -->
+  <section id="objecoes" class="section hidden fade-in">
+    <div class="bg-gray-900 rounded-2xl p-6 md:p-8 border border-gray-800 mb-6">
+      <h3 class="text-2xl font-bold mb-4 brand text-orange-500">Etapa 4: Tratamento de Objeções</h3>
+      <p class="text-gray-400 mb-6">Clique em cada objeção para ver a análise e resposta estratégica.</p>
+      
+      <div class="space-y-3" id="objections-list"></div>
+    </div>
+  </section>
+
+  <!-- CENÁRIOS -->
+  <section id="cenarios" class="section hidden fade-in">
+    <div class="bg-gray-900 rounded-2xl p-6 md:p-8 border border-gray-800 mb-6">
+      <h3 class="text-2xl font-bold mb-4 brand text-orange-500">🎭 Cenários Possíveis</h3>
+      <p class="text-gray-400 mb-6">Clique em cada perfil para expandir e ver o roteiro completo de abordagem.</p>
+      
+      <div class="space-y-3" id="scenarios-container"></div>
+    </div>
+  </section>
+
+  <!-- FECHAMENTO -->
+  <section id="fechamento" class="section hidden fade-in">
+    <div class="bg-gray-900 rounded-2xl p-6 md:p-8 border border-gray-800 mb-6">
+      <h3 class="text-2xl font-bold mb-4 brand text-orange-500">Etapa 5: Chamada para Ação</h3>
+      
+      <div class="bg-black rounded-xl p-5 border border-gray-800 mb-4 relative">
+        <button onclick="copyText('cta-text', this)" class="copy-btn absolute top-3 right-3 bg-gray-800 text-xs px-3 py-1 rounded-full">📋 Copiar</button>
+        <p id="cta-text" class="text-gray-200 leading-relaxed whitespace-pre-line pr-20">A melhor forma de entender essa diferença não é eu te explicando, mas sim você sentindo na prática.
+
+Vamos agendar sua Aula Experimental ou uma Visita Guiada para você conhecer o espaço e a galera?
+
+Tenho disponibilidade para te receber na Quinta-feira às 19h ou Sexta-feira às 10h. Qual desses horários fica melhor para sua rotina?</p>
+      </div>
+    </div>
+
+    <div class="bg-gray-900 rounded-2xl p-6 md:p-8 border border-gray-800 mb-6">
+      <h3 class="text-2xl font-bold mb-4 brand text-orange-500">📋 Pré-Cadastro</h3>
+      <p class="text-gray-400 mb-4">Após aceitação, colete os dados de forma natural e acolhedora.</p>
+      
+      <div class="bg-black rounded-xl p-5 border border-gray-800 relative">
+        <button onclick="copyText('form-text', this)" class="copy-btn absolute top-3 right-3 bg-gray-800 text-xs px-3 py-1 rounded-full">📋 Copiar</button>
+        <p id="form-text" class="text-gray-200 leading-relaxed whitespace-pre-line pr-20">Perfeito, [Nome]! Para garantir sua vaga e preparar tudo com a máxima segurança e atenção para a sua chegada, preciso apenas de algumas informações rápidas para o seu pré-cadastro:
+
+• Nome Completo:
+• Data de Nascimento:
+• RG:
+• CPF:
+• CEP:
+• Número e Complemento:
+• E-mail (para envio do relatório pós-treino):
+• Dia que deseja iniciar os treinos:
+• Em caso de emergência, ligar para:
+• Telefone:
+• Hospital de preferência:
+• Plano de saúde:
+• É optante por identificação na Nota Fiscal Paulista? (Sim/Não)
+
+Pode me enviar esses dados por aqui mesmo!</p>
+      </div>
+    </div>
+
+    <div class="bg-gray-900 rounded-2xl p-6 md:p-8 border border-gray-800">
+      <h3 class="text-2xl font-bold mb-4 brand text-orange-500">👋 Saudação Final</h3>
+      
+      <div class="bg-black rounded-xl p-5 border border-gray-800 relative">
+        <button onclick="copyText('bye-text', this)" class="copy-btn absolute top-3 right-3 bg-gray-800 text-xs px-3 py-1 rounded-full">📋 Copiar</button>
+        <p id="bye-text" class="text-gray-200 leading-relaxed whitespace-pre-line pr-20">Olá, [Nome]! 😊 Passando para avisar que meu expediente foi encerrado por hoje.
+
+Amanhã estarei de volta e daremos continuidade ao seu atendimento com toda a atenção. Assim que eu retornar, entrarei em contato com você para confirmarmos os detalhes da sua visita e tirar qualquer dúvida que tenha ficado.
+
+Tenha uma ótima tarde/noite e até amanhã!</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SIMULADOR -->
+  <section id="simulador" class="section hidden fade-in">
+    <div class="bg-gray-900 rounded-2xl p-6 md:p-8 border border-gray-800">
+      <div class="flex items-center justify-between mb-4 flex-wrap gap-3">
+        <h3 class="text-2xl font-bold brand text-orange-500">💬 Simulador de Conversa</h3>
+        <div class="flex gap-2">
+          <select id="scenarioSelect" class="bg-gray-800 border border-gray-700 rounded-lg px-3 py-1.5 text-sm">
+            <option value="emagrecimento">🏃 Emagrecimento</option>
+            <option value="estressado">💼 Profissional Estressado</option>
+            <option value="social">👥 Busca Socialização</option>
+            <option value="tecnologia">📊 Curioso por Tecnologia</option>
+            <option value="sedentario">🤕 Sedentário com Medo</option>
+          </select>
+          <button onclick="resetChat()" class="bg-gray-800 hover:bg-orange-500 transition px-3 py-1.5 rounded-lg text-sm">🔄</button>
+        </div>
+      </div>
+      <p class="text-gray-400 text-sm mb-4">Escolha um perfil de lead e simule uma conversa. Clique nas sugestões de resposta para avançar.</p>
+      
+      <div id="chatWindow" class="bg-black rounded-xl p-4 border border-gray-800 h-96 overflow-y-auto mb-4 space-y-3"></div>
+      
+      <div id="chatSuggestions" class="grid md:grid-cols-2 gap-2"></div>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="border-t border-gray-800 py-6 text-center text-sm text-gray-500">
+  <p>Cia Athletica Mooca Plaza Shopping • Roteiro Interno de Vendas • 2026</p>
+  <p class="text-xs mt-2">Programa Cia Conecta • 100 pontos por indicação válida • mooca@ciaathletica.com.br</p>
+</footer>
+
+<!-- TOAST -->
+<div id="toast" class="fixed bottom-6 right-6 bg-orange-500 text-white px-6 py-3 rounded-lg shadow-lg transform translate-y-20 opacity-0 transition-all duration-300 z-50 flex items-center gap-2">
+  <span>✓</span>
+  <span id="toastMessage">Copiado!</span>
+</div>
+
+<script>
+// ============ DADOS ============
+const objections = [
+  {
+    title: '"Não tenho tempo"',
+    analysis: 'O lead percebe a duração da aula (1h) como um compromisso grande.',
+    response: 'Entendo perfeitamente. A boa notícia é que, por ser tão intensa, a aula é curta e eficiente. Além disso, nosso monitoramento garante que você maximize o resultado em menos tempo. E o melhor: você ganha uma hora inteira só pra você, longe das distrações do dia a dia.'
+  },
+  {
+    title: '"Está um pouco caro"',
+    analysis: 'O lead avalia o custo em relação a outras opções.',
+    response: 'Em vez de pensar no custo, vamos pensar no valor. O que você pagaria por um acompanhamento que mostra exatamente quantas calorias você queimou e te ajuda a evitar treinos que não te levam a lugar nenhum? A aula experimental é o nosso jeito de você testar o método e ver o resultado antes de se comprometer.'
+  },
+  {
+    title: '"Não sou bom de esporte / tenho medo"',
+    analysis: 'O lead sente insegurança e medo do julgamento dos outros.',
+    response: 'Absolutamente ninguém começa sabendo. Nossa aula é feita para todos os níveis, e os monitores ensinam todos os movimentos. Com o monitor cardíaco, você sabe que está no seu ritmo seguro e que cada minuto conta. A maioria dos nossos alunos mais dedicados foi iniciante também.'
+  },
+  {
+    title: '"Prefiro começar com algo mais leve"',
+    analysis: 'O lead percebe a intensidade como um impedimento.',
+    response: 'A intensidade é ajustável para cada um! O legal da nossa metodologia é que você pode escolher o nível de esforço, e o monitor mostra se você está na zona certa. Começamos com um aquecimento completo para preparar o corpo, e os movimentos podem ser feitos com menor amplitude. A vantagem é que, treinando com a intensidade certa, você evita lesões e vê os resultados mais rápido.'
+  },
+  {
+    title: '"Vou pensar um pouco"',
+    analysis: 'O lead precisa de mais tempo para processar a informação.',
+    response: 'Claro, é uma decisão importante! Só gostaria de deixar um detalhe: as vagas para a aula experimental são limitadas para garantir a qualidade do acompanhamento. Posso reservar uma vaga para você para a próxima semana? Assim você pode decidir com calma, já com a oportunidade garantida.'
+  },
+  {
+    title: '"Já treino em outra academia"',
+    analysis: 'O lead está satisfeito com o atual, mas aberto a comparação.',
+    response: 'Que legal que você já tem o hábito! O que muitos alunos que migram para cá destacam é justamente o diferencial do nosso acompanhamento tecnológico. Aqui você não treina no escuro: recebe relatórios personalizados após cada sessão monitorada. Que tal experimentar uma aula sem compromisso para comparar?'
+  }
+];
+
+const scenarios = [
+  {
+    id: 'emagrecimento',
+    profile: '🏃 Foco em Emagrecimento',
+    description: 'Lead quer perder peso e melhorar a saúde.',
+    color: '#ff6b00',
+    approach: 'Enfatize o relatório pós-treino com calorias queimadas e zonas de queima de gordura. Mencione o slogan "Queime calorias até depois do treino!".',
+    story: 'Use história de transformação física com números concretos de perda de peso.',
+    greeting: 'Olá [Nome]! 😊 Vi que você se interessou pela Cia Athletica Mooca. Quer saber como nossa metodologia pode te ajudar a queimar gordura de forma controlada e segura?',
+    discovery: 'Qual o seu maior desafio para manter uma rotina de exercícios? Você já treinou antes e teve dificuldade para ver resultados?',
+    pitch: 'Na Cia Athletica, você recebe um relatório por e-mail após cada treino mostrando exatamente quantas calorias queimou. É a prova visual de que seu esforço está valendo a pena. E com a nossa aula Orange Zone, você queima calorias até depois do treino!'
+  },
+  {
+    id: 'estressado',
+    profile: '💼 Profissional Estressado',
+    description: 'Lead busca aliviar estresse e ter mais energia.',
+    color: '#3b82f6',
+    approach: 'Destaque a aula como "válvula de escape" de 1h. Foco no monitoramento como forma de desconectar e focar em si mesmo.',
+    story: 'Use história de transformação mental com melhora do sono e foco.',
+    greeting: 'Olá [Nome]! 😊 Vi que você se interessou pela Cia Athletica Mooca. Muitas pessoas usam nossos treinos para deixar a correria do dia a dia pra trás. Você também busca isso?',
+    discovery: 'Como você costuma lidar com o estresse no final do dia? Quando você pensa em começar a malhar, o que vem primeiro: o corpo ou a mente?',
+    pitch: 'Nossos treinos monitorados são como uma meditação ativa: você foca só no seu ritmo, no seu corpo, e sai renovado. O relatório pós-treino mostra que você cuidou de você de verdade.'
+  },
+  {
+    id: 'social',
+    profile: '👥 Busca Socialização',
+    description: 'Lead quer motivação de grupo e fazer amigos.',
+    color: '#a855f7',
+    approach: 'Enfatize a energia da turma, o ambiente acolhedor e o programa Cia Conecta para trazer amigos.',
+    story: 'Use história de transformação social com formação de vínculos.',
+    greeting: 'Olá [Nome]! 😊 Vi que você se interessou pela Cia Athletica Mooca! Nossa turma é superanimada e acaba virando uma tradição. Você também procura um ambiente motivador?',
+    discovery: 'Treinar em grupo já faz parte do seu plano? O que você mais procura em uma academia: privacidade ou energia de grupo?',
+    pitch: 'Aqui você encontra uma comunidade que te motiva. E com o programa Cia Conecta, você ainda ganha pontos e descontos indicando amigos que queiram viver essa transformação com você!'
+  },
+  {
+    id: 'tecnologia',
+    profile: '📊 Curioso por Tecnologia',
+    description: 'Lead quer ver resultados concretos e dados.',
+    color: '#22c55e',
+    approach: 'Apresente o relatório detalhado por e-mail como diferencial. Fale sobre zonas cardíacas e personalização.',
+    story: 'Use história de transformação métrica com números específicos.',
+    greeting: 'Olá [Nome]! 😊 Vi que você se interessou pela Cia Athletica Mooca. Nós usamos monitoramento cardíaco para mostrar exatamente como cada treino está te ajudando. Quer entender como funciona?',
+    discovery: 'Você já treinou com algum aparelho que mede frequência cardíaca? Gostaria de ter um jeito de saber exatamente quantas calorias queimou hoje?',
+    pitch: 'Nosso sistema mostra em tempo real sua zona cardíaca ideal. Após o treino, você recebe um relatório completo: calorias, tempo em cada zona, frequência média. É ciência aplicada ao seu corpo.'
+  },
+  {
+    id: 'sedentario',
+    profile: '🤕 Sedentário com Medo',
+    description: 'Lead nunca treinou, tem medo de se machucar.',
+    color: '#ef4444',
+    approach: 'Reforce o pilar de acolhimento e segurança. Explique que a intensidade é adaptável e os instrutores estão presentes.',
+    story: 'Use história de alguém que começou do zero e se surpreendeu.',
+    greeting: 'Olá [Nome]! 😊 Vi que você se interessou pela Cia Athletica Mooca. É totalmente normal sentir insegurança ao começar. Nossa equipe é treinada para te acolher do primeiro ao último minuto.',
+    discovery: 'O que mais te preocupa ao pensar em começar? Já teve alguma experiência ruim com exercícios no passado?',
+    pitch: 'Nossa metodologia foi feita para quem está começando. Os instrutores ensinam cada movimento, e o monitor cardíaco garante que você treine no seu ritmo seguro. Você nunca estará sozinho.'
+  }
+];
+
+const chatFlows = {
+  emagrecimento: [
+    { type: 'system', text: '🎭 Cenário: Lead interessado em emagrecimento' },
+    { type: 'consultant', text: 'Olá, [Nome]! Tudo bem? 😊 Aqui é o consultor da Cia Athletica Mooca. Vi que você demonstrou interesse em conhecer nossa academia. Me conta: qual é o seu principal objetivo ao começar a treinar?' },
+    { type: 'lead', text: 'Oi! Quero emagrecer uns 10kg, mas tenho medo de não ver resultado...' },
+    { type: 'suggestion', options: [
+      { text: '🎯 Validar + Storytelling', next: 1 },
+      { text: '💰 Falar de preço logo', next: 'fail' }
+    ]},
+    { type: 'consultant', text: 'Entendo perfeitamente! Você me lembrou a Mariana, que chegou aqui com o mesmo objetivo. Em 3 meses, com nosso método de monitoramento, ela atingiu a meta e hoje indica amigas pelo Cia Conecta!' },
+    { type: 'lead', text: 'Nossa, que legal! Mas como funciona esse monitoramento?' },
+    { type: 'suggestion', options: [
+      { text: '💓 Explicar 3 Pilares', next: 2 },
+      { text: '🤷 Responder superficial', next: 'fail' }
+    ]},
+    { type: 'consultant', text: 'Temos 3 pilares: Acolhimento (você nunca treina sozinho), Resultados Mensuráveis (monitoramento cardíaco em tempo real) e Prova Concreta (relatório por e-mail com calorias queimadas). Na Orange Zone, você queima calorias até depois do treino!' },
+    { type: 'lead', text: 'Parece incrível! Quero experimentar!' },
+    { type: 'suggestion', options: [
+      { text: '✅ Agendar Aula Experimental', next: 3 },
+      { text: '📋 Mandar tabela de preços', next: 'fail' }
+    ]},
+    { type: 'consultant', text: 'Perfeito! Tenho vaga Quinta às 19h ou Sexta às 10h. Qual fica melhor? 🎉' },
+    { type: 'success', text: '✅ CONVERSÃO! Lead agendou aula experimental.' }
+  ],
+  estressado: [
+    { type: 'system', text: '🎭 Cenário: Profissional estressado buscando alívio' },
+    { type: 'consultant', text: 'Olá, [Nome]! 😊 Vi que você se interessou pela Cia Athletica Mooca. Me conta: qual é o seu principal objetivo ao começar a treinar?' },
+    { type: 'lead', text: 'Oi! Trabalho 10h por dia, tô estressado e sem energia. Preciso de algo que me desconecte.' },
+    { type: 'suggestion', options: [
+      { text: '🧠 Validar + Storytelling mental', next: 1 },
+      { text: '💪 Falar só de físico', next: 'fail' }
+    ]},
+    { type: 'consultant', text: 'Entendo perfeitamente! O Pedro, gerente como você, encontrou na nossa academia a única hora do dia de paz. Ele foca só no monitor cardíaco, na respiração... e sai renovado.' },
+    { type: 'lead', text: 'Isso é exatamente o que eu preciso! Como funciona?' },
+    { type: 'suggestion', options: [
+      { text: '💓 Explicar metodologia', next: 2 },
+      { text: '🤷 Resposta vaga', next: 'fail' }
+    ]},
+    { type: 'consultant', text: 'Nossos treinos monitorados são como meditação ativa. Você foca só no seu ritmo, e recebe um relatório por e-mail mostrando que cuidou de você de verdade. A Orange Zone é perfeita pra isso!' },
+    { type: 'lead', text: 'Quero experimentar!' },
+    { type: 'suggestion', options: [
+      { text: '✅ Agendar aula', next: 3 },
+      { text: '📋 Enviar preço', next: 'fail' }
+    ]},
+    { type: 'consultant', text: 'Perfeito! Tenho vaga Quinta às 19h ou Sexta às 10h. Qual fica melhor?' },
+    { type: 'success', text: '✅ CONVERSÃO! Lead agendou aula experimental.' }
+  ],
+  social: [
+    { type: 'system', text: '🎭 Cenário: Lead busca socialização' },
+    { type: 'consultant', text: 'Olá, [Nome]! 😊 Vi que você se interessou pela Cia Athletica Mooca. Me conta: qual é o seu principal objetivo?' },
+    { type: 'lead', text: 'Oi! Acabei de me mudar pra cá e quero fazer amigos treinando.' },
+    { type: 'suggestion', options: [
+      { text: '👥 Validar + Storytelling social', next: 1 },
+      { text: '🏋️ Falar só de treino', next: 'fail' }
+    ]},
+    { type: 'consultant', text: 'Que legal! A Ana chegou sozinha há 6 meses e hoje treinar virou a melhor parte da semana dela. Nossa turma é super acolhedora!' },
+    { type: 'lead', text: 'Nossa, que bom! Como é o ambiente?' },
+    { type: 'suggestion', options: [
+      { text: '🤝 Explicar comunidade + Cia Conecta', next: 2 },
+      { text: '🤷 Resposta curta', next: 'fail' }
+    ]},
+    { type: 'consultant', text: 'Aqui você encontra uma comunidade que te motiva. E com o programa Cia Conecta, você ganha pontos e descontos indicando amigos que queiram viver essa transformação com você!' },
+    { type: 'lead', text: 'Adorei! Quero conhecer!' },
+    { type: 'suggestion', options: [
+      { text: '✅ Agendar aula em grupo', next: 3 },
+      { text: '📋 Mandar preço', next: 'fail' }
+    ]},
+    { type: 'consultant', text: 'Perfeito! Temos aula em grupo Quinta às 19h. Posso te garantir uma vaga?' },
+    { type: 'success', text: '✅ CONVERSÃO! Lead agendou aula experimental.' }
+  ],
+  tecnologia: [
+    { type: 'system', text: '🎭 Cenário: Lead curioso por tecnologia' },
+    { type: 'consultant', text: 'Olá, [Nome]! 😊 Vi que você se interessou pela Cia Athletica Mooca. Me conta: qual é o seu principal objetivo?' },
+    { type: 'lead', text: 'Oi! Quero ver resultados reais, não só suar. Como vocês medem isso?' },
+    { type: 'suggestion', options: [
+      { text: '📊 Falar do monitoramento', next: 1 },
+      { text: '💪 Falar só de esforço', next: 'fail' }
+    ]},
+    { type: 'consultant', text: 'Perfeito! Usamos monitoramento cardíaco em tempo real. O Carlos, por exemplo, viu na primeira aula que queimou 800 calorias e ficou 15 min na zona de queima máxima. Ele ficou tão surpreso que já agendou a semana toda!' },
+    { type: 'lead', text: 'Como funciona na prática?' },
+    { type: 'suggestion', options: [
+      { text: '💓 Explicar 3 Pilares', next: 2 },
+      { text: '🤷 Responder vago', next: 'fail' }
+    ]},
+    { type: 'consultant', text: 'Você usa um monitor que mostra sua zona cardíaca ideal em tempo real. Após o treino, recebe um relatório por e-mail: calorias, tempo em cada zona, frequência média. É ciência aplicada ao seu corpo!' },
+    { type: 'lead', text: 'Isso é incrível! Quero testar!' },
+    { type: 'suggestion', options: [
+      { text: '✅ Agendar aula', next: 3 },
+      { text: '📋 Mandar preço', next: 'fail' }
+    ]},
+    { type: 'consultant', text: 'Perfeito! Tenho vaga Quinta às 19h ou Sexta às 10h. Qual fica melhor?' },
+    { type: 'success', text: '✅ CONVERSÃO! Lead agendou aula experimental.' }
+  ],
+  sedentario: [
+    { type: 'system', text: '🎭 Cenário: Sedentário com medo' },
+    { type: 'consultant', text: 'Olá, [Nome]! 😊 Vi que você se interessou pela Cia Athletica Mooca. Me conta: qual é o seu principal objetivo?' },
+    { type: 'lead', text: 'Oi... nunca treinei na vida. Tenho medo de não conseguir e me machucar.' },
+    { type: 'suggestion', options: [
+      { text: '🤝 Validar + Storytelling', next: 1 },
+      { text: '💪 "É só ter força"', next: 'fail' }
+    ]},
+    { type: 'consultant', text: 'Entendo perfeitamente, é totalmente normal! A Mariana chegou exatamente assim, com medo. Hoje, 4 meses depois, ela completa corridas e diz que o segredo foi ter o método e o ambiente certos.' },
+    { type: 'lead', text: 'Mas e se eu não acompanhar o ritmo?' },
+    { type: 'suggestion', options: [
+      { text: '🛡️ Explicar segurança + monitor', next: 2 },
+      { text: '🤷 "Você vai conseguir"', next: 'fail' }
+    ]},
+    { type: 'consultant', text: 'Nossa metodologia foi feita para iniciantes! Os instrutores ensinam cada movimento, e o monitor cardíaco garante que você treine no SEU ritmo seguro. Você nunca estará sozinho.' },
+    { type: 'lead', text: 'Isso me deixa mais tranquila. Quero experimentar!' },
+    { type: 'suggestion', options: [
+      { text: '✅ Agendar aula', next: 3 },
+      { text: '📋 Mandar preço', next: 'fail' }
+    ]},
+    { type: 'consultant', text: 'Perfeito! Tenho vaga Quinta às 19h ou Sexta às 10h. Qual fica melhor?' },
+    { type: 'success', text: '✅ CONVERSÃO! Lead agendou aula experimental.' }
+  ]
+};
+
+const checklistItems = [
+  { id: 1, text: 'Saudação personalizada enviada', section: 'saudacao' },
+  { id: 2, text: 'Objetivo do lead identificado', section: 'saudacao' },
+  { id: 3, text: 'Storytelling aplicado', section: 'storytelling' },
+  { id: 4, text: '3 Pilares apresentados', section: 'argumentacao' },
+  { id: 5, text: 'Objeções tratadas', section: 'objecoes' },
+  { id: 6, text: 'Cenário identificado', section: 'cenarios' },
+  { id: 7, text: 'Aula experimental agendada', section: 'fechamento' }
+];
+
+// ============ ESTADO ============
+let currentSection = 'filosofia';
+let currentStep = 1;
+let checklistState = JSON.parse(localStorage.getItem('checklistState') || '{}');
+let currentChatStep = 0;
+let currentChatFlow = 'emagrecimento';
+
+// ============ FUNÇÕES ============
+
+// Mostrar seção
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.add('hidden'));
+  const target = document.getElementById(id);
+  if (target) {
+    target.classList.remove('hidden');
+    target.classList.remove('fade-in');
+    void target.offsetWidth;
+    target.classList.add('fade-in');
+  }
+  
+  // Atualizar tabs
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('tab-active'));
+  document.querySelectorAll('.tab-btn').forEach(b => {
+    if (b.getAttribute('onclick') === `showSection('${id}')`) {
+      b.classList.add('tab-active');
+    }
+  });
+  
+  // Atualizar progresso
+  const stepMap = {
+    'filosofia': 1, 'saudacao': 2, 'storytelling': 3,
+    'argumentacao': 4, 'objecoes': 5, 'cenarios': 6, 'fechamento': 7, 'simulador': 0
+  };
+  const step = stepMap[id] || 0;
+  if (step > 0) {
+    currentStep = step;
+    updateProgress();
+  }
+  
+  // Scroll suave pro topo
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  
+  // Inicializar simulador se necessário
+  if (id === 'simulador') {
+    initChat();
+  }
+}
+
+// Atualizar progresso
+function updateProgress() {
+  document.querySelectorAll('.progress-step').forEach(s => {
+    const step = parseInt(s.getAttribute('data-step'));
+    s.classList.remove('active', 'completed');
+    if (step < currentStep) s.classList.add('completed');
+    else if (step === currentStep) s.classList.add('active');
+  });
+  document.getElementById('progressText').textContent = `Etapa ${currentStep} de 7`;
+}
+
+// Copiar texto (com fallback)
+function copyText(id, btn) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  
+  const text = el.innerText;
+  
+  // Método moderno
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(text).then(() => {
+      showToast('Copiado para a área de transferência!');
+      if (btn) animateCopyBtn(btn);
+    }).catch(() => {
+      fallbackCopy(text, btn);
+    });
+  } else {
+    fallbackCopy(text, btn);
+  }
+}
+
+function fallbackCopy(text, btn) {
+  const textarea = document.createElement('textarea');
+  textarea.value = text;
+  textarea.style.position = 'fixed';
+  textarea.style.opacity = '0';
+  document.body.appendChild(textarea);
+  textarea.select();
+  try {
+    document.execCommand('copy');
+    showToast('Copiado!');
+    if (btn) animateCopyBtn(btn);
+  } catch (err) {
+    showToast('Erro ao copiar');
+  }
+  document.body.removeChild(textarea);
+}
+
+function animateCopyBtn(btn) {
+  const original = btn.innerHTML;
+  btn.innerHTML = '✓ Copiado!';
+  btn.style.background = '#22c55e';
+  btn.style.color = 'white';
+  setTimeout(() => {
+    btn.innerHTML = original;
+    btn.style.background = '';
+    btn.style.color = '';
+  }, 1500);
+}
+
+// Toast
+function showToast(message) {
+  const toast = document.getElementById('toast');
+  document.getElementById('toastMessage').textContent = message;
+  toast.classList.remove('translate-y-20', 'opacity-0');
+  setTimeout(() => {
+    toast.classList.add('translate-y-20', 'opacity-0');
+  }, 2000);
+}
+
+// Toggle accordion
+function toggleAccordion(i) {
+  const content = document.getElementById(`content-${i}`);
+  const arrow = document.getElementById(`arrow-${i}`);
+  content.classList.toggle('open');
+  arrow.style.transform = content.classList.contains('open') ? 'rotate(180deg)' : 'rotate(0)';
+}
+
+// Toggle scenario
+function toggleScenario(id) {
+  const expanded = document.getElementById(`scenario-expanded-${id}`);
+  const arrow = document.getElementById(`scenario-arrow-${id}`);
+  expanded.classList.toggle('open');
+  arrow.style.transform = expanded.classList.contains('open') ? 'rotate(180deg)' : 'rotate(0)';
+}
+
+// Checklist
+function toggleChecklist() {
+  const panel = document.getElementById('checklistPanel');
+  panel.classList.toggle('hidden');
+}
+
+function toggleChecklistItem(id) {
+  checklistState[id] = !checklistState[id];
+  localStorage.setItem('checklistState', JSON.stringify(checklistState));
+  renderChecklist();
+}
+
+function resetChecklist() {
+  checklistState = {};
+  localStorage.setItem('checklistState', JSON.stringify(checklistState));
+  renderChecklist();
+  showToast('Checklist reiniciado!');
+}
+
+function renderChecklist() {
+  const container = document.getElementById('checklistItems');
+  container.innerHTML = '';
+  let checked = 0;
+  
+  checklistItems.forEach(item => {
+    const isChecked = checklistState[item.id];
+    if (isChecked) checked++;
+    
+    const div = document.createElement('div');
+    div.className = `checklist-item flex items-center gap-3 p-2 rounded-lg border border-gray-700 cursor-pointer ${isChecked ? 'checked' : ''}`;
+    div.onclick = () => toggleChecklistItem(item.id);
+    div.innerHTML = `
+      <div class="check-box w-5 h-5 rounded border-2 border-gray-600 flex items-center justify-center transition">
+        ${isChecked ? '<span class="text-white text-xs">✓</span>' : ''}
+      </div>
+      <span class="check-text text-sm flex-1">${item.text}</span>
+      <button onclick="event.stopPropagation(); showSection('${item.section}')" class="text-xs text-orange-400 hover:text-orange-300">→</button>
+    `;
+    container.appendChild(div);
+  });
+  
+  document.getElementById('checklistCount').textContent = `${checked}/7`;
+}
+
+// Renderizar objeções
+function renderObjections() {
+  const container = document.getElementById('objections-list');
+  container.innerHTML = '';
+  
+  objections.forEach((obj, i) => {
+    const div = document.createElement('div');
+    div.className = 'bg-gray-800/50 rounded-xl border border-gray-700 overflow-hidden';
+    div.innerHTML = `
+      <button onclick="toggleAccordion(${i})" class="w-full p-4 flex items-center justify-between text-left hover:bg-gray-800 transition">
+        <div class="flex items-center gap-3">
+          <span class="text-orange-500 font-bold text-lg">⚡</span>
+          <span class="font-semibold">${obj.title}</span>
+        </div>
+        <span class="text-gray-400 transition-transform duration-300" id="arrow-${i}">▼</span>
+      </button>
+      <div class="accordion-content" id="content-${i}">
+        <div class="p-4 pt-0 space-y-3">
+          <div class="bg-black/50 rounded-lg p-3">
+            <div class="text-xs text-gray-500 uppercase mb-1">Análise</div>
+            <p class="text-sm text-gray-300">${obj.analysis}</p>
+          </div>
+          <div class="bg-orange-500/10 rounded-lg p-3 border border-orange-500/30 relative">
+            <button onclick="copyText('response-${i}', this)" class="copy-btn absolute top-2 right-2 bg-gray-800 text-xs px-2 py-1 rounded-full">📋</button>
+            <div class="text-xs text-orange-400 uppercase mb-1">Resposta Estratégica</div>
+            <p id="response-${i}" class="text-sm text-gray-200 leading-relaxed pr-12">${obj.response}</p>
+          </div>
+        </div>
+      </div>
+    `;
+    container.appendChild(div);
+  });
+}
+
+// Renderizar cenários
+function renderScenarios() {
+  const container = document.getElementById('scenarios-container');
+  container.innerHTML = '';
+  
+  scenarios.forEach(sc => {
+    const div = document.createElement('div');
+    div.className = 'bg-gray-900 rounded-xl border border-gray-800 overflow-hidden';
+    div.style.borderLeft = `4px solid ${sc.color}`;
+    div.innerHTML = `
+      <button onclick="toggleScenario('${sc.id}')" class="w-full p-4 flex items-center justify-between text-left hover:bg-gray-800/50 transition">
+        <div>
+          <div class="font-bold text-lg">${sc.profile}</div>
+          <div class="text-sm text-gray-400">${sc.description}</div>
+        </div>
+        <span class="text-gray-400 transition-transform duration-300" id="scenario-arrow-${sc.id}">▼</span>
+      </button>
+      <div class="scenario-expanded" id="scenario-expanded-${sc.id}">
+        <div class="p-4 pt-0 space-y-3">
+          <div class="bg-black/50 rounded-lg p-3">
+            <div class="text-xs text-orange-400 uppercase mb-1">🎯 Abordagem</div>
+            <p class="text-sm text-gray-300">${sc.approach}</p>
+          </div>
+          <div class="bg-black/50 rounded-lg p-3">
+            <div class="text-xs text-orange-400 uppercase mb-1">📖 Storytelling</div>
+            <p class="text-sm text-gray-300">${sc.story}</p>
+          </div>
+          <div class="bg-orange-500/10 rounded-lg p-3 border border-orange-500/30 relative">
+            <button onclick="copyText('scenario-greeting-${sc.id}', this)" class="copy-btn absolute top-2 right-2 bg-gray-800 text-xs px-2 py-1 rounded-full">📋</button>
+            <div class="text-xs text-orange-400 uppercase mb-1">💬 Saudação</div>
+            <p id="scenario-greeting-${sc.id}" class="text-sm text-gray-200 pr-12">${sc.greeting}</p>
+          </div>
+          <div class="bg-orange-500/10 rounded-lg p-3 border border-orange-500/30 relative">
+            <button onclick="copyText('scenario-discovery-${sc.id}', this)" class="copy-btn absolute top-2 right-2 bg-gray-800 text-xs px-2 py-1 rounded-full">📋</button>
+            <div class="text-xs text-orange-400 uppercase mb-1">🔍 Descoberta</div>
+            <p id="scenario-discovery-${sc.id}" class="text-sm text-gray-200 pr-12">${sc.discovery}</p>
+          </div>
+          <div class="bg-orange-500/10 rounded-lg p-3 border border-orange-500/30 relative">
+            <button onclick="copyText('scenario-pitch-${sc.id}', this)" class="copy-btn absolute top-2 right-2 bg-gray-800 text-xs px-2 py-1 rounded-full">📋</button>
+            <div class="text-xs text-orange-400 uppercase mb-1">🎯 Pitch</div>
+            <p id="scenario-pitch-${sc.id}" class="text-sm text-gray-200 pr-12">${sc.pitch}</p>
+          </div>
+          <button onclick="loadScenarioInSimulator('${sc.id}')" class="w-full bg-orange-500 hover:bg-orange-600 transition text-white font-semibold py-2 rounded-lg text-sm">💬 Simular este cenário</button>
+        </div>
+      </div>
+    `;
+    container.appendChild(div);
+  });
+}
+
+// Simulador
+function initChat() {
+  currentChatStep = 0;
+  renderChat();
+}
+
+function resetChat() {
+  currentChatStep = 0;
+  renderChat();
+}
+
+function loadScenarioInSimulator(id) {
+  currentChatFlow = id;
+  currentChatStep = 0;
+  document.getElementById('scenarioSelect').value = id;
+  showSection('simulador');
+  renderChat();
+}
+
+function renderChat() {
+  const flow = chatFlows[currentChatFlow];
+  if (!flow) return;
+  
+  const chatWindow = document.getElementById('chatWindow');
+  const suggestions = document.getElementById('chatSuggestions');
+  chatWindow.innerHTML = '';
+  suggestions.innerHTML = '';
+  
+  // Mostrar mensagens até o passo atual
+  for (let i = 0; i <= currentChatStep && i < flow.length; i++) {
+    const msg = flow[i];
+    const bubble = document.createElement('div');
+    
+    if (msg.type === 'system') {
+      bubble.className = 'text-center text-xs text-gray-500 py-2';
+      bubble.textContent = msg.text;
+    } else if (msg.type === 'consultant') {
+      bubble.className = 'chat-bubble flex gap-2';
+      bubble.innerHTML = `
+        <div class="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">C</div>
+        <div class="bg-orange-500/20 border border-orange-500/30 rounded-2xl rounded-tl-sm px-4 py-2 max-w-md">
+          <p class="text-sm text-gray-200">${msg.text}</p>
+        </div>
+      `;
+    } else if (msg.type === 'lead') {
+      bubble.className = 'chat-bubble flex gap-2 justify-end';
+      bubble.innerHTML = `
+        <div class="bg-gray-800 border border-gray-700 rounded-2xl rounded-tr-sm px-4 py-2 max-w-md">
+          <p class="text-sm text-gray-200">${msg.text}</p>
+        </div>
+        <div class="w-8 h-8 bg-gray-600 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">L</div>
+      `;
+    } else if (msg.type === 'success') {
+      bubble.className = 'chat-bubble bg-green-500/20 border border-green-500/50 rounded-xl p-4 text-center';
+      bubble.innerHTML = `<p class="text-green-400 font-bold">${msg.text}</p>`;
+    }
+    
+    chatWindow.appendChild(bubble);
+  }
+  
+  // Mostrar sugestões se o passo atual é uma suggestion
+  const currentMsg = flow[currentChatStep];
+  if (currentMsg && currentMsg.type === 'suggestion') {
+    currentMsg.options.forEach(opt => {
+      const btn = document.createElement('button');
+      btn.className = 'bg-gray-800 hover:bg-orange-500 border border-gray-700 hover:border-orange-500 transition p-3 rounded-xl text-sm text-left';
+      btn.textContent = opt.text;
+      btn.onclick = () => {
+        if (opt.next === 'fail') {
+          showFailState();
+        } else {
+          currentChatStep = opt.next;
+          renderChat();
+        }
+      };
+      suggestions.appendChild(btn);
+    });
+  }
+  
+  chatWindow.scrollTop = chatWindow.scrollHeight;
+}
+
+function showFailState() {
+  const chatWindow = document.getElementById('chatWindow');
+  const suggestions = document.getElementById('chatSuggestions');
+  
+  const bubble = document.createElement('div');
+  bubble.className = 'chat-bubble bg-red-500/20 border border-red-500/50 rounded-xl p-4 text-center';
+  bubble.innerHTML = `
+    <p class="text-red-400 font-bold mb-2">❌ Oportunidade perdida!</p>
+    <p class="text-sm text-gray-300">O lead não se sentiu acolhido e perdeu o interesse.</p>
+  `;
+  chatWindow.appendChild(bubble);
+  
+  suggestions.innerHTML = `
+    <button onclick="resetChat()" class="bg-orange-500 hover:bg-orange-600 transition text-white font-semibold py-3 rounded-xl text-sm col-span-2">🔄 Tentar novamente</button>
+  `;
+  
+  chatWindow.scrollTop = chatWindow.scrollHeight;
+}
+
+// Busca
+document.getElementById('searchInput').addEventListener('input', function(e) {
+  const query = e.target.value.toLowerCase().trim();
+  if (!query) {
+    // Remover highlights
+    document.querySelectorAll('.search-highlight').forEach(el => {
+      el.outerHTML = el.textContent;
+    });
+    return;
+  }
+  
+  // Procurar nas seções
+  const sections = {
+    'filosofia': ['filosofia', 'mentalidade', 'consultor', 'acolhimento', 'segurança'],
+    'saudacao': ['saudação', 'saudacao', 'tratativa', 'olá', 'quebra de gelo'],
+    'storytelling': ['storytelling', 'história', 'narrativa', 'mariana'],
+    'argumentacao': ['argumentação', 'argumentacao', 'pilares', 'orange zone', 'monitoramento'],
+    'objecoes': ['objeção', 'objecoes', 'tempo', 'caro', 'medo', 'pensar'],
+    'cenarios': ['cenário', 'cenarios', 'perfil', 'emagrecimento', 'estressado'],
+    'fechamento': ['fechamento', 'cta', 'pré-cadastro', 'despedida']
+  };
+  
+  for (const [section, keywords] of Object.entries(sections)) {
+    if (keywords.some(k => k.includes(query) || query.includes(k))) {
+      showSection(section);
+      break;
+    }
+  }
+});
+
+// Select do simulador
+document.getElementById('scenarioSelect').addEventListener('change', function(e) {
+  currentChatFlow = e.target.value;
+  currentChatStep = 0;
+  renderChat();
+});
+
+// ============ INICIALIZAÇÃO ============
+document.addEventListener('DOMContentLoaded', function() {
+  renderObjections();
+  renderScenarios();
+  renderChecklist();
+  updateProgress();
+});
+</script>
+
+</body>
+</html>
